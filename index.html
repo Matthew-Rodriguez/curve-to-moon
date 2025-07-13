@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyToken - MTK</title>
+  <title>aura - aura</title>
+  <meta name="description" content="aura for aura">
+  <meta property="og:title" content="aura - aura">
+  <meta property="og:description" content="aura for aura">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://matthew-rodriguez.github.io/curve-to-moon/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="aura - aura">
+  <meta name="twitter:description" content="aura for aura">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
       min-height: 100vh;
-      margin: 0;
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
       color: #222;
@@ -15,41 +28,55 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0;
+      padding: 20px;
     }
+    
     .container {
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.9);
       box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
       border-radius: 2em;
       padding: 2.5em 2em 2em 2em;
-      margin-top: 2em;
-      max-width: 400px;
+      max-width: 500px;
       width: 100%;
       text-align: center;
       backdrop-filter: blur(8px);
+      margin-bottom: 2em;
     }
+    
     h1 {
       font-size: 2.5em;
       margin-bottom: 0.2em;
       color: #7b2ff2;
       letter-spacing: 0.03em;
     }
+    
     .symbol {
       font-size: 1.2em;
       color: #f357a8;
       margin-bottom: 1em;
       font-weight: 600;
     }
+    
     .desc {
       font-size: 1.1em;
       margin-bottom: 1.5em;
       color: #444;
+      line-height: 1.6;
     }
+    
+    .address-label {
+      font-size: 1.05em;
+      color: #555;
+      margin-bottom: 0.3em;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    
     .address {
       background: #fff;
       border-radius: 1.2em;
       padding: 0.7em 1em;
-      font-size: 1em;
+      font-size: 0.9em;
       margin-bottom: 1em;
       word-break: break-all;
       box-shadow: 0 2px 8px rgba(123,47,242,0.07);
@@ -57,20 +84,25 @@
       align-items: center;
       justify-content: center;
       gap: 0.5em;
+      flex-wrap: wrap;
     }
+    
     .copy-btn {
       background: #7b2ff2;
       color: #fff;
       border: none;
       border-radius: 0.7em;
       padding: 0.3em 0.8em;
-      font-size: 0.95em;
+      font-size: 0.85em;
       cursor: pointer;
       transition: background 0.2s;
+      white-space: nowrap;
     }
+    
     .copy-btn:hover {
       background: #f357a8;
     }
+    
     .buy-btn {
       background: #f357a8;
       color: #fff;
@@ -85,29 +117,201 @@
       box-shadow: 0 2px 8px rgba(243,87,168,0.13);
       transition: background 0.2s;
     }
+    
     .buy-btn:hover {
       background: #7b2ff2;
     }
-    .footer {
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1em;
+      margin-top: 1.5em;
+    }
+    
+    .stat-item {
+      background: rgba(255,255,255,0.8);
+      padding: 1em;
+      border-radius: 1em;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #7b2ff2;
+    }
+    
+    .stat-label {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 0.3em;
+    }
+    
+    .roadmap {
       margin-top: 2em;
-      font-size: 0.95em;
-      color: #888;
+      text-align: left;
+    }
+    
+    .roadmap h3 {
+      color: #7b2ff2;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    
+    .roadmap-item {
+      background: rgba(255,255,255,0.8);
+      padding: 1em;
+      margin-bottom: 0.5em;
+      border-radius: 0.8em;
+      border-left: 4px solid #f357a8;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1em;
+      margin-top: 1.5em;
+    }
+    
+    .team-member {
+      background: rgba(255,255,255,0.8);
+      padding: 1em;
+      border-radius: 1em;
+      text-align: center;
+    }
+    
+    .team-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+      margin: 0 auto 0.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: white;
+    }
+    
+    .chart-container {
+      margin-top: 2em;
+      background: rgba(255,255,255,0.8);
+      padding: 1.5em;
+      border-radius: 1em;
+    }
+    
+    .chart-placeholder {
+      height: 200px;
+      background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                  linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                  linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                  linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      border-radius: 0.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-style: italic;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5em 1em;
+        margin: 1em;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .address {
+        font-size: 0.8em;
+        flex-direction: column;
+        gap: 0.5em;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>MyToken</h1>
-    <div class="symbol">MTK</div>
-    <div class="desc">A meme token.</div>
+    <h1>aura</h1>
+    <div class="symbol">aura</div>
+    <div class="desc">aura for aura</div>
+    
+    <div class="address-label">Contract Address</div>
     <div class="address">
-      <span id="tokenAddress">Token address here</span>
-      <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('tokenAddress').innerText);this.innerText='Copied!';setTimeout(()=>this.innerText='Copy',1200)">Copy</button>
+      <span id="tokenAddress">HN8yLhpHVkzAk1dLNxZTvPLoYwxrUusM7svbnSyLsPzQ</span>
+      <button class="copy-btn" onclick="copyAddress()">Copy</button>
     </div>
+    
     <button class="buy-btn" onclick="window.open('https://pump.fun/', '_blank')">Buy on Pump.fun</button>
-    <div style="margin-top:1.5em;font-size:1em;color:#7b2ff2;">2025 sleek, elegant, bubbly, trendy</div>
-    <div style="margin-top:0.5em;font-size:0.95em;color:#f357a8;">Elements: coin,address,buy button</div>
+    
+    
+    
+    
+    
+    
+    
+    
   </div>
-  <div class="footer">Auto-generated by Pump.fun bot</div>
+  
+  <script>
+    function copyAddress() {
+      const address = document.getElementById('tokenAddress').innerText;
+      navigator.clipboard.writeText(address).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.innerText = 'Copied!';
+        setTimeout(() => {
+          btn.innerText = 'Copy';
+        }, 1200);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = address;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const btn = document.querySelector('.copy-btn');
+        btn.innerText = 'Copied!';
+        setTimeout(() => {
+          btn.innerText = 'Copy';
+        }, 1200);
+      });
+    }
+    
+    // Add some interactivity
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate stats on scroll
+      const stats = document.querySelectorAll('.stat-value');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+          }
+        });
+      });
+      
+      stats.forEach(stat => observer.observe(stat));
+    });
+  </script>
+  
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </body>
 </html>
